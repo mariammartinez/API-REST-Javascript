@@ -1,16 +1,21 @@
 const bcrypt = require ('bcrypt');
 const jwt = require('jsonwebtoken');
 const User = require('../models/user');
+const md5 = require('md5');
 
 exports.signup = (req, res, next) =>{
-  
-    console.log(req.body.password);
+     
+if(req.body.password.length < 5){
+    res.status(500).json({ message : 'mdp pas bon'})
+    return ;
+}
+
     bcrypt.hash(req.body.password, 10)
 
     .then(hash => {
-      
+
         const user = new User ({
-            email: req.body.email,
+            email: md5(req.body.email),
             password: hash
         })
         user.save()
@@ -18,27 +23,28 @@ exports.signup = (req, res, next) =>{
             res.status(201).json({ message : 'utilisateur créé'})
         })
         .catch (error => {
-            console.log(error);
+        
             res.status(500).json({  error : 'utilisateur non trouvé' })
         })
+      //})
+
+
         
     })
     .catch(error => res.status(500).json({ error }));
-
-
 };
 
 
 exports.login = (req, res, next) =>{
-    User.findOne({ email: req.body.email})
+    User.findOne({ email: md5(req.body.email)})
     .then(user => {
         if (!user){
-            return res.status(401).json({ error : 'utilisateur non trouvé'});
+            return res.status(401).json({ errorMsg : 'utilisateur déjà existant'});
         }
         bcrypt.compare(req.body.password, user.password)
         .then(valid => {
             if (!valid){
-                return res.satuts(401).json({ error : 'mot de passe incorrect'});
+                return res.satuts(401).json({ errorMsg : 'mot de passe incorrect'});
             }
             res.status(200).json({
                 userId : user._id,
@@ -49,7 +55,7 @@ exports.login = (req, res, next) =>{
                 )
             });
         })
-        .catch(error => res.status(500).json({ error }));
+        .catch(error => res.status(500).json({ error}));
     })
     .catch(error  => res.status(500).json({ error }));
 

@@ -5,7 +5,6 @@ const fs = require ('fs');
 
 exports.createSauce = (req, res, next) => {
   const sauceObject = JSON.parse(req.body.sauce);
-  console.log(sauceObject);
 
       const sauce = new Sauce({ 
           ...sauceObject,
@@ -72,12 +71,8 @@ exports.createLike = (req, res, next) =>{
   })
 
 
-     /*
-  .then(() => res.status(201).json({message: 'objet liké'}))
   .catch(error => res.status(404).json({ error }));
-  console.log(sauce)
-*/
- 
+
 }
 
 exports.modifySauce = (req, res, next) => {

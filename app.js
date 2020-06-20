@@ -6,8 +6,6 @@ const userRoutes = require('./routes/user');
 
 const path = require('path');
 
-
-
 const app = express();
 app.use(bodyParser.urlencoded({extended : false}));
 app.use(bodyParser.json());
