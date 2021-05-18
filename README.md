@@ -1,6 +1,6 @@
 # API REST Javascript
 
-# Construisez une API sécurisée pour une application d'avis gastronomiques.
+# Construire une API sécurisée pour une application d'avis gastronomiques.
 
 Le projet 6 consiste à développer le back d'une application sous form d'API REST compatible avec le front fourni en React.js.
 L'application permet de partager et noter des sauces piquantes.
