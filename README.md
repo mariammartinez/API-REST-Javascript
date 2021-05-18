@@ -1,4 +1,4 @@
-# projet6
+# API REST Javascript
 
 # Construisez une API sécurisée pour une application d'avis gastronomiques.
 
