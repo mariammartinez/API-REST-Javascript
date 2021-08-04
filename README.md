@@ -7,3 +7,10 @@ L'application permet de partager et noter des sauces piquantes.
 
 ## Les contraintes techniques 
 Utiliser Express.js et une base de données MongoDb.
+
+## Instalation
+
+```
+npm i
+npm run start
+```
